@@ -1,0 +1,32 @@
+version: '3.8'
+services:
+  db:
+    build:
+      context: ./init-db      
+      dockerfile: Dockerfile
+    container_name: sqlserver_container
+    ports:
+      - "1433:1433"
+    environment:
+      SA_PASSWORD: salesPred314!
+      ACCEPT_EULA: "Y"
+    networks:
+      - app-network
+
+  api:
+    build:
+      context: ./SalesDatePrediction-back
+      dockerfile: SalesDatePrediction.API/Dockerfile
+    container_name: api_container
+    ports:
+      - "5000:8080"
+    environment:
+      - ConnectionStrings__DefaultConnection=Server=sqlserver_container;Database=StoreSample;User Id=sa;Password=salesPred314!;TrustServerCertificate=True;
+    depends_on:
+      - db
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
