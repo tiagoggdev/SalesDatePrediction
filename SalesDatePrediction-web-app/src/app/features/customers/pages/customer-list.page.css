@@ -1,0 +1,27 @@
+.customer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.search-input {
+  flex: 1;
+  max-width: 800px;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+::ng-deep .snack-success {
+  background-color: #4caf50;
+  color: white;
+}
+
+::ng-deep .snack-error {
+  background-color: #aa0000;
+  color: white;
+}
+
+

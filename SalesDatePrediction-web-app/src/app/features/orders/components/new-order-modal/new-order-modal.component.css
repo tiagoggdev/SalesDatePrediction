@@ -1,0 +1,15 @@
+.row {
+  display: flex;
+  gap: 1rem;
+}
+
+.form-container h3 {
+  color: #333;
+  font-weight: bold;
+  font-size: 16px;
+  margin: 0.5rem 0;
+}
+
+::ng-deep .mat-form-field-appearance-fill .mat-form-field-flex .mat-form-field {
+  background-color: transparent !important;
+}

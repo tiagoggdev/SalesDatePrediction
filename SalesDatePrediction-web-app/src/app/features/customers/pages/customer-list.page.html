@@ -1,0 +1,26 @@
+<div class="customer-list-container">
+  
+  <div class="customer-header">
+    <h2>Customers</h2>
+    <div class="search-input">
+      <mat-form-field appearance="fill">
+        <mat-label>Customer Name</mat-label>
+        <input matInput [(ngModel)]="search" (keydown.enter)="onSearchEnter()">
+        <mat-icon matSuffix>search</mat-icon>
+      </mat-form-field>
+
+    </div>
+  </div>
+
+  <app-customer-table
+    [customers]="customers"
+    [totalRecords]="totalRecords"
+    [loading]="loading"
+    [rows]="rows"
+    [page]="page"
+    (pageChange)="onPageChange($event)"
+    (viewOrders)="onViewOrders($event)"
+    (newOrder)="onNewOrder($event)">
+  </app-customer-table>
+
+</div>

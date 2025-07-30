@@ -1,0 +1,44 @@
+<div class="mat-elevation-z1">
+  <table mat-table [dataSource]="dataSource" matSort>
+
+    <ng-container matColumnDef="customerName">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header >
+        Customer Name
+      </th>
+      <td mat-cell *matCellDef="let customer"> {{ customer.customerName }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="lastOrderDate">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header >
+        Last Order Date
+      </th>
+      <td mat-cell *matCellDef="let customer"> {{ customer.lastOrderDate | date:'shortDate' }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="nextPredictedOrder">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+        Next Predicted Order
+      </th>
+      <td mat-cell *matCellDef="let customer"> {{ customer.nextPredictedOrder | date:'shortDate' }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef> </th>
+      <td mat-cell *matCellDef="let customer" class="actions-cell">
+        <button mat-button class="btn-rojo" (click)="viewOrders.emit(customer)">VIEW ORDERS</button>
+        <button mat-button class="btn-verde" (click)="newOrder.emit(customer)">NEW ORDER</button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator
+    [length]="totalRecords"
+    [pageSize]="rows"
+    [pageSizeOptions]="[5, 10, 25, 50]"
+    [hidePageSize]="true"
+    (page)="onPage($event)">
+  </mat-paginator>
+</div>
