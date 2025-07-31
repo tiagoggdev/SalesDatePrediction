@@ -5,12 +5,14 @@ Aplicación para la predicción de fechas de nuevas órdenes de clientes basada 
 
 ## Contenido del proyecto
 
+- `d3/`: Carpeta que contiene la solución al punto de crear un gráfico con d3.js
+- `db/init-db/`: Scripts y configuración para inicializar la base de datos (Ejecutados automáticamente si usas docker, o manualmente si no)
+- `postman/`: Colección postman
+- `queries-db/`: Carpeta que contiene las consultas requeridas en el punto dos
 - `SalesDatePrediction-back/`: Backend en ASP.NET Core Web API
 - `SalesDatePrediction-web-app/`: Frontend en Angular 17
-- `init-db/`: Scripts y configuración para inicializar la base de datos
-- `docker-compose.yml`: Archivo de orquestación de contenedores
 - `README.md`: Instrucciones del proyecto
-- `postman/`: Colección postman
+- `docker-compose.yml`: Archivo de orquestación de contenedores
 ---
 
 ## Tecnologías utilizadas
