@@ -10,7 +10,7 @@ Aplicación para la predicción de fechas de nuevas órdenes de clientes basada 
 - `init-db/`: Scripts y configuración para inicializar la base de datos
 - `docker-compose.yml`: Archivo de orquestación de contenedores
 - `README.md`: Instrucciones del proyecto
-
+- `postman/`: Colección postman
 ---
 
 ## Tecnologías utilizadas
@@ -29,6 +29,7 @@ Aplicación para la predicción de fechas de nuevas órdenes de clientes basada 
 
 - Angular 17
 - Angular Material
+- Docker
 
 ### Base de Datos
 
@@ -37,6 +38,7 @@ Aplicación para la predicción de fechas de nuevas órdenes de clientes basada 
   - `DBSetup.sql`: Creación de base de datos y tablas
   - `create-view-for-back.sql`: Creación de vista para obtener predicción de fecha de próxima venta
   - `spneworder.sql`: Procedimiento almacenado para crear una nueva orden
+- Docker
 
 ---
 ## Postman
@@ -93,12 +95,6 @@ Esto construirá y levantará los siguientes servicios:
   
 
 3.  **Acceso a los servicios:**
-
-  
-
-| Servicio | URL de acceso |
-
-|----------|----------------------------------|
 
 | API | http://localhost:5000 |
 | Web App | http://localhost:4200/ |
@@ -208,7 +204,7 @@ La aplicación estará disponible en `http://localhost:4200`.
 
   ---
 ## Pruebas
-El proyecto incluye pruebas unitarias que cubren:
+El proyecto incluye pruebas unitarias para el proyecto .NET que cubren:
 
 -   **Validaciones con FluentValidation**:
     
