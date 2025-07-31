@@ -22,6 +22,7 @@ services:
     ports:
       - "5000:8080"
     environment:
+      - ASPNETCORE_ENVIRONMENT=Docker
       - ConnectionStrings__DefaultConnection=Server=db;Database=StoreSample;User Id=sa;Password=salesPred314!;TrustServerCertificate=True;
     depends_on:
       - db

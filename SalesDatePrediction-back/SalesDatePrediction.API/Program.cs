@@ -9,9 +9,18 @@ using SalesDatePrediction.Infrastructure.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.WebHost.UseUrls("http://localhost:5000");
+
+builder.Configuration
+    .SetBasePath(Directory.GetCurrentDirectory())
+    .AddJsonFile("appsettings.json", optional: false)
+    .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true)
+    .AddEnvironmentVariables();
+
 var conString = builder.Configuration.GetConnectionString("DefaultConnection") ??
-     throw new InvalidOperationException("Connection string 'AppDbContext'" +
+     throw new InvalidOperationException("Connection string 'DefaultConnection'" +
     " not found.");
+
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(conString));
 
