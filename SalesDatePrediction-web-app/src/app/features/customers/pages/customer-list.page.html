@@ -6,7 +6,7 @@
       <mat-form-field appearance="fill">
         <mat-label>Customer Name</mat-label>
         <input matInput [(ngModel)]="search" (keydown.enter)="onSearchEnter()">
-        <mat-icon matSuffix onclick="onSearchEnter()">search</mat-icon>
+        <mat-icon matSuffix (click)="onSearchEnter()">search</mat-icon>
       </mat-form-field>
 
     </div>
