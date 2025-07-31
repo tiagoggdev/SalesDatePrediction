@@ -2,12 +2,19 @@
 
 /opt/mssql/bin/sqlservr &
 
-echo "Waiting SQLServer init"
-sleep 20
+until /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P 'salesPred314!' -Q "SELECT 1" > /dev/null 2>&1
+do
+    echo "SQLServer iniciando"
+    sleep 5
+done
+
+echo "SQL Server listo"
 
 for file in /init-db/*.sql; do
+  echo "Ejecutando script $file"
   /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P 'salesPred314!' -i "$file"
 done
 
+echo "scripts ejecutados"
+
 wait
-¿
