@@ -34,7 +34,7 @@ services:
       dockerfile: Dockerfile
     container_name: webapp_container
     ports:
-      - "4200:80"
+      - "4200:4000"
     depends_on:
       - api
     networks:

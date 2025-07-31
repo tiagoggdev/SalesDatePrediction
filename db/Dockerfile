@@ -6,7 +6,6 @@ ENV MSSQL_PID=Developer
 
 USER root
 
-# Instala sqlcmd
 RUN apt-get update && \
     apt-get install -y curl gnupg apt-transport-https && \
     curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add - && \
@@ -17,11 +16,13 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-# Copia scripts y entrypoint
+RUN apt-get update && apt-get install -y dos2unix
+
 COPY ./init-db/ /init-db/
 COPY ./entrypoint.sh /entrypoint.sh
 
-RUN chmod +x /entrypoint.sh
+RUN dos2unix /entrypoint.sh && chmod +x /entrypoint.sh
+
 USER mssql
 
 CMD [ "/entrypoint.sh" ]

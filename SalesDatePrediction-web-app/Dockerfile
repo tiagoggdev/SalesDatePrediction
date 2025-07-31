@@ -1,18 +1,12 @@
-FROM node:18-alpine AS build
-
-WORKDIR /app
-
+FROM node:18-alpine as build
+WORKDIR /app/src
 COPY package*.json ./
-RUN npm install
+RUN npm ci
+COPY . ./
+RUN npm run build
 
-COPY . .
-RUN npm run build -- --configuration production
-
-FROM nginx:alpine
-
-RUN rm -rf /usr/share/nginx/html/*
-COPY /app/dist/sales-date-prediction-web-app /usr/share/nginx/html
-
-EXPOSE 80
-
-CMD ["nginx", "-g", "daemon off;"]
+FROM node:18-alpine
+WORKDIR /usr/app
+COPY --from=build /app/src/dist/sales-date-prediction-web-app ./
+CMD node server/server.mjs
+EXPOSE 4000
