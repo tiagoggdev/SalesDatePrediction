@@ -28,6 +28,18 @@ services:
     networks:
       - app-network
 
+  frontend:
+    build:
+      context: ./SalesDatePrediction-web-app
+      dockerfile: Dockerfile
+    container_name: webapp_container
+    ports:
+      - "4200:80"
+    depends_on:
+      - api
+    networks:
+      - app-network
+
 networks:
   app-network:
     driver: bridge
