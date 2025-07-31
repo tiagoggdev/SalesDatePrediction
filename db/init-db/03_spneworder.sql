@@ -21,7 +21,7 @@ GO
 -- Create date: <29/07/2025>
 -- Description:	<SP to create an order and order detail>
 -- =============================================
-CREATE PROCEDURE Sales.AddOrderWithDetailsTest
+CREATE PROCEDURE Sales.AddOrderWithDetails
 	@Custid INT,
 	@Empid INT,
     @Shipperid INT,

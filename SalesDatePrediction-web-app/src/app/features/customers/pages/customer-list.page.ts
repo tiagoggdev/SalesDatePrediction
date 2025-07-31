@@ -123,14 +123,14 @@ export class CustomerListPage implements OnInit {
           });
 
         } else {
-          this.snackBar.open('Orden creada con éxito', 'Cerrar', {
+          this.snackBar.open('Error al crear la orden ' + res.error, 'Cerrar', {
             duration: 4000,
             panelClass: ['snack-error'], 
           });
         }
       },
       error: () => {
-        this.snackBar.open('Orden creada con éxito', 'Cerrar', {
+        this.snackBar.open('Error inesperado', 'Cerrar', {
           duration: 4000,
           panelClass: ['snack-error'], 
         });
