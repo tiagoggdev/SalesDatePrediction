@@ -100,42 +100,6 @@ Esto construirá y levantará los siguientes servicios:
 | Web App | http://localhost:4200/ |
 
 | SQL Server | localhost:1433 (usuario: `sa`, password: `salesPred314!`) |
-
-
-4.  **Verifica que la base de datos se haya creado correctamente:**
-
-  
-
-Puedes acceder al contenedor de SQL Server y usar `sqlcmd`:
-
-  
-
-```bash
-
-docker  exec  -it  db /bin/bash
-
-/opt/mssql-tools/bin/sqlcmd  -S  localhost  -U  sa  -P  "salesPred314!"
-
-```
-
-  
-
-Una vez dentro, ejecuta:
-
-  
-
-```sql
-
-SELECT  name  FROM sys.databases;
-
-GO
-
-```
-
-  
-
-Deberías ver `StoreSample` en la lista de bases de datos.
-
   
 
 ---
