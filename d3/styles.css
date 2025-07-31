@@ -1,0 +1,31 @@
+body {
+  font-family: sans-serif;
+  padding: 20px;
+}
+
+input {
+  width: 300px;
+  padding: 5px;
+}
+
+.btn-update {
+  padding: 5px 10px;
+  margin-left: 5px;
+  color: white;
+  background-color: rgb(77, 176, 221);
+  border: 0px solid transparent;
+  border-radius: 5px;
+}
+
+.bar {
+  stroke: none;
+}
+
+.axis text {
+  font-size: 12px;
+}
+
+.error {
+  color: red;
+  margin-top: 10px;
+}
