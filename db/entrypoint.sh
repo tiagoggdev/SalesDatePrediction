@@ -15,6 +15,8 @@ for file in /init-db/*.sql; do
   /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P 'salesPred314!' -i "$file"
 done
 
+touch /tmp/db-ready
+
 echo "scripts ejecutados"
 
 wait

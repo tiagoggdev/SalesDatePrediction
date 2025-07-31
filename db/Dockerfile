@@ -18,6 +18,8 @@ RUN apt-get update && \
 
 RUN apt-get update && apt-get install -y dos2unix
 
+HEALTHCHECK CMD [ "test", "-f", "/tmp/db-ready" ]
+
 COPY ./init-db/ /init-db/
 COPY ./entrypoint.sh /entrypoint.sh
 
