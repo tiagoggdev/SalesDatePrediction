@@ -1,0 +1,409 @@
+{
+	"info": {
+		"_postman_id": "d1aed039-b6b7-462b-a2ad-f251f5157ef4",
+		"name": "SalesDatePrediction.API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24405864"
+	},
+	"item": [
+		{
+			"name": "Customer",
+			"item": [
+				{
+					"name": "GetSalesPrediction",
+					"item": [
+						{
+							"name": "/Customer/GetSalesPrediction",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/Customer/GetSalesPrediction?CustomerName=Customer EEALV&PageNumber=1&PageSize=10",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"Customer",
+										"GetSalesPrediction"
+									],
+									"query": [
+										{
+											"key": "CustomerName",
+											"value": "Customer EEALV"
+										},
+										{
+											"key": "PageNumber",
+											"value": "1"
+										},
+										{
+											"key": "PageSize",
+											"value": "10"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "OK",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/Customer/GetSalesPrediction?CustomerName=stri&PageNumber=7896&PageSize=7896",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"Customer",
+												"GetSalesPrediction"
+											],
+											"query": [
+												{
+													"key": "CustomerName",
+													"value": "stri"
+												},
+												{
+													"key": "PageNumber",
+													"value": "7896"
+												},
+												{
+													"key": "PageSize",
+													"value": "7896"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Employee",
+			"item": [
+				{
+					"name": "GetAll",
+					"item": [
+						{
+							"name": "/Employee/GetAll",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/Employee/GetAll",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"Employee",
+										"GetAll"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "OK",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/Employee/GetAll",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"Employee",
+												"GetAll"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Order",
+			"item": [
+				{
+					"name": "GetByCustomerId",
+					"item": [
+						{
+							"name": "/Order/GetByCustomerId",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/Order/GetByCustomerId?CustomerId=1&PageNumber=1&PageSize=10",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"Order",
+										"GetByCustomerId"
+									],
+									"query": [
+										{
+											"key": "CustomerId",
+											"value": "1"
+										},
+										{
+											"key": "PageNumber",
+											"value": "1"
+										},
+										{
+											"key": "PageSize",
+											"value": "10"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "OK",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/Order/GetByCustomerId?CustomerId=7896&PageNumber=7896&PageSize=7896",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"Order",
+												"GetByCustomerId"
+											],
+											"query": [
+												{
+													"key": "CustomerId",
+													"value": "7896"
+												},
+												{
+													"key": "PageNumber",
+													"value": "7896"
+												},
+												{
+													"key": "PageSize",
+													"value": "7896"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "AddOrder",
+					"item": [
+						{
+							"name": "/Order/AddOrder",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"custId\": 1,\n  \"empid\": 1,\n  \"shipperid\": 1,\n  \"shipname\": \"test\",\n  \"shipaddress\": \"test\",\n  \"shipcity\": \"test\",\n  \"orderdate\": \"2010-07-06T03:17:04.970Z\",\n  \"requireddate\": \"1975-09-14T23:37:39.110Z\",\n  \"shippeddate\": \"1990-12-19T19:13:50.001Z\",\n  \"freight\": 12313,\n  \"shipcountry\": \"test\",\n  \"productid\": 1,\n  \"unitprice\": 5000,\n  \"qty\": 50,\n  \"discount\": 0.6\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/Order/AddOrder",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"Order",
+										"AddOrder"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "OK",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"custId\": 6908,\n  \"empid\": 6758,\n  \"shipperid\": 5009,\n  \"shipname\": \"string\",\n  \"shipaddress\": \"s\",\n  \"shipcity\": \"strin\",\n  \"orderdate\": \"2010-07-06T03:17:04.970Z\",\n  \"requireddate\": \"1975-09-14T23:37:39.110Z\",\n  \"shippeddate\": \"1990-12-19T19:13:50.001Z\",\n  \"freight\": 8400.26162704332,\n  \"shipcountry\": \"string\",\n  \"productid\": 4074,\n  \"unitprice\": 4156.396262091149,\n  \"qty\": 9090,\n  \"discount\": 4044.2093462807807\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/Order/AddOrder",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"Order",
+												"AddOrder"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Product",
+			"item": [
+				{
+					"name": "GetAll",
+					"item": [
+						{
+							"name": "/Product/GetAll",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/Product/GetAll",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"Product",
+										"GetAll"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "OK",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/Product/GetAll",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"Product",
+												"GetAll"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Shipper",
+			"item": [
+				{
+					"name": "GetAll",
+					"item": [
+						{
+							"name": "/Shipper/GetAll",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/Shipper/GetAll",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"Shipper",
+										"GetAll"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "OK",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/Shipper/GetAll",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"Shipper",
+												"GetAll"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:5000"
+		}
+	]
+}
