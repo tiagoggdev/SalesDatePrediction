@@ -26,5 +26,5 @@ steps:
 
 - script: |
     cd SalesDatePrediction-back
-    dotnet test --no-build --verbosity normal
+    dotnet test SalesDatePrediction.Test/SalesDatePrediction.Test.csproj --no-build --verbosity normal
   displayName: 'Run tests'
