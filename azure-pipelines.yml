@@ -1,0 +1,30 @@
+trigger:
+- main  # O la rama que uses
+
+pool:
+  name: Default  # Usa tu agente local registrado
+
+variables:
+  buildConfiguration: 'Release'
+
+steps:
+- task: UseDotNet@2
+  inputs:
+    packageType: 'sdk'
+    version: '9.0.x'  # Reemplaza por la versión exacta de .NET 9 que uses
+    installationPath: $(Agent.ToolsDirectory)/dotnet
+
+- script: |
+    cd SalesDatePrediction-back
+    dotnet restore
+  displayName: 'Restore dependencies'
+
+- script: |
+    cd SalesDatePrediction-back
+    dotnet build --configuration $(buildConfiguration) --no-restore
+  displayName: 'Build project'
+
+- script: |
+    cd SalesDatePrediction-back
+    dotnet test --no-build --verbosity normal
+  displayName: 'Run tests'
