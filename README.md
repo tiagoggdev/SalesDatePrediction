@@ -134,12 +134,13 @@ Esto construirá y levantará los siguientes servicios:
 
 ```bash
 
-cd  SalesDatePrediction.API
+cd  SalesDatePrediction-back
 
 dotnet  restore
 
 dotnet  build
 
+cd SalesDatePrediction.API
 dotnet  run
 
 ```
