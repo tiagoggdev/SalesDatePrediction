@@ -62,8 +62,20 @@ stages:
       runOnce:
         deploy:
           steps:
-          - powershell: Stop-WebAppPool -Name "SalesDatePredictionAPI"
-            displayName: "Stop IIS App Pool"
+          - powershell: |
+              $appPoolName = "SalesDatePredictionAPI"
+              Import-Module WebAdministration
+              $status = (Get-WebAppPoolState -Name $appPoolName).Value
+
+              Write-Host "Estado actual del App Pool: $status"
+
+              if ($status -eq "Started") {
+                  Write-Host "Deteniendo App Pool..."
+                  Stop-WebAppPool -Name $appPoolName
+              } else {
+                  Write-Host "El App Pool ya estaba detenido, continuando..."
+              }
+            displayName: "Stop IIS App Pool (si está iniciado)"
 
           - powershell: |
               $backupRoot = "C:\inetpub\wwwroot\backups\SalesDatePredictionAPI"
@@ -81,14 +93,6 @@ stages:
 
               Write-Host "Backup creado en: $backupFile"
             displayName: "Backup IIS Site"
-
-
-          - task: CopyFiles@2
-            displayName: "Backup current IIS files"
-            inputs:
-              SourceFolder: 'C:\inetpub\wwwroot\SalesDatePredictionAPI'
-              Contents: '**'
-              TargetFolder: 'D:\IIS_Backups\SalesDatePredictionAPI_$(Build.BuildNumber)'              
 
           - task: CopyFiles@2
             displayName: "Copy files to IIS"
