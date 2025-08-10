@@ -66,9 +66,22 @@ stages:
             displayName: "Stop IIS App Pool"
 
           - powershell: |
-              $backupPath = "D:\IIS_Backups\SalesDatePredictionAPI_$(Build.BuildNumber).zip"
-              Compress-Archive -Path "C:\inetpub\wwwroot\SalesDatePredictionAPI\*" -DestinationPath $backupPath
-            displayName: "Compress IIS Backup"
+              $backupRoot = "C:\inetpub\wwwroot\backups\SalesDatePredictionAPI"
+              $timestamp = Get-Date -Format "yyyyMMdd_HHmmss"
+              $backupFile = "$backupRoot\SalesDatePredictionAPI_$timestamp.zip"
+
+              # Crear carpeta de backups si no existe
+              if (-not (Test-Path $backupRoot)) {
+                  New-Item -ItemType Directory -Path $backupRoot | Out-Null
+                  Write-Host "Carpeta de backups creada: $backupRoot"
+              }
+
+              # Comprimir el contenido actual del proyecto
+              Compress-Archive -Path "C:\inetpub\wwwroot\SalesDatePredictionAPI\*" -DestinationPath $backupFile -Force
+
+              Write-Host "Backup creado en: $backupFile"
+            displayName: "Backup IIS Site"
+
 
           - task: CopyFiles@2
             displayName: "Backup current IIS files"
