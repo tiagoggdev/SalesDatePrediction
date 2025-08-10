@@ -28,5 +28,11 @@ namespace SalesDatePrediction.API.Controllers
 
             return BadRequest(response);
         }
+
+        [HttpGet("Test")]
+        public IActionResult Test()
+        {
+            return Ok("Working");
+        }
     }
 }
