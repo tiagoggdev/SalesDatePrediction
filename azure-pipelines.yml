@@ -100,6 +100,10 @@ stages:
               SourceFolder: '$(Pipeline.Workspace)/drop'
               TargetFolder: 'C:\inetpub\wwwroot\SalesDatePredictionAPI'  # Cambia por la ruta de tu sitio
               OverWrite: true
+              CleanTargetFolder: false
+              Contents: |
+                **/*
+                !web.config
 
           - powershell: Start-WebAppPool -Name "SalesDatePredictionAPI"
             displayName: "Start IIS App Pool"

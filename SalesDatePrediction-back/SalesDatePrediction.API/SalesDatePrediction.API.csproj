@@ -9,9 +9,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Update="web.config">
-      <CopyToPublishDirectory>Never</CopyToPublishDirectory>
-    </Content>
     <PackageReference Include="FluentValidation" Version="12.0.0" />
     <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="12.0.0" />
     <PackageReference Include="MediatR" Version="13.0.0" />
