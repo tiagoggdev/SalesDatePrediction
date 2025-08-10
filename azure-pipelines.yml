@@ -10,7 +10,7 @@ stages:
   jobs:
   - job: BuildJob
     pool:
-      name: Default  # Usa tu agente de Azure DevOps (puede ser Microsoft-hosted)
+      name: IIS-server  # Usa tu agente de Azure DevOps (puede ser Microsoft-hosted)
     variables:
       buildConfiguration: 'Release'
       ASPNETCORE_ENVIRONMENT: 'Development'
@@ -57,7 +57,7 @@ stages:
     displayName: "Deploy on IIS Server"
     environment: 'IIS-Prod'  # Puedes dejarlo así o darle un nombre a tu entorno
     pool:
-      name: Default  # Aquí debe estar el agente self-hosted en el servidor IIS
+      name: IIS-server  # Aquí debe estar el agente self-hosted en el servidor IIS
     strategy:
       runOnce:
         deploy:
