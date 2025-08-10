@@ -1,30 +1,75 @@
 trigger:
-- main  # O la rama que uses
+- main  # Cambia si tu rama principal es otra
 
-pool:
-  name: Default  # Usa tu agente local registrado
+# =========================
+# Stage 1: Build (CI)
+# =========================
+stages:
+- stage: Build
+  displayName: "Build and Test"
+  jobs:
+  - job: BuildJob
+    pool:
+      name: Default  # Usa tu agente de Azure DevOps (puede ser Microsoft-hosted)
+    variables:
+      buildConfiguration: 'Release'
+    steps:
+    - task: UseDotNet@2
+      inputs:
+        packageType: 'sdk'
+        version: '9.0'  # Cambia por la versión exacta que uses
+        installationPath: $(Agent.ToolsDirectory)/dotnet
 
-variables:
-  buildConfiguration: 'Release'
+    - script: |
+        cd SalesDatePrediction-back
+        dotnet restore
+      displayName: 'Restore dependencies'
 
-steps:
-- task: UseDotNet@2
-  inputs:
-    packageType: 'sdk'
-    version: '9.0.x'  # Reemplaza por la versión exacta de .NET 9 que uses
-    installationPath: $(Agent.ToolsDirectory)/dotnet
+    - script: |
+        cd SalesDatePrediction-back
+        dotnet build --configuration $(buildConfiguration) --no-restore
+      displayName: 'Build project'
 
-- script: |
-    cd SalesDatePrediction-back
-    dotnet restore
-  displayName: 'Restore dependencies'
+    - script: |
+        cd SalesDatePrediction-back
+        dotnet test SalesDatePrediction.Test/SalesDatePrediction.Test.csproj --verbosity normal
+      displayName: 'Run tests'
 
-- script: |
-    cd SalesDatePrediction-back
-    dotnet build --configuration $(buildConfiguration) --no-restore
-  displayName: 'Build project'
+    # Publicar artefactos para el deploy
+    - script: |
+        cd SalesDatePrediction-back
+        dotnet publish --configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)
+      displayName: 'Publish artifacts'
 
-- script: |
-    cd SalesDatePrediction-back
-    dotnet test SalesDatePrediction.Test/SalesDatePrediction.Test.csproj --verbosity normal
-  displayName: 'Run tests'
+    - publish: $(Build.ArtifactStagingDirectory)
+      artifact: drop
+
+# =========================
+# Stage 2: Deploy (CD)
+# =========================
+- stage: Deploy
+  displayName: "Deploy to IIS"
+  dependsOn: Build
+  condition: succeeded()  # Solo se ejecuta si el build fue exitoso
+  jobs:
+  - deployment: DeployToIIS
+    displayName: "Deploy on IIS Server"
+    environment: 'IIS-Prod'  # Puedes dejarlo así o darle un nombre a tu entorno
+    pool:
+      name: Default  # Aquí debe estar el agente self-hosted en el servidor IIS
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - powershell: Stop-WebAppPool -Name "SalesDatePredictionAPI"
+            displayName: "Stop IIS App Pool"
+
+          - task: CopyFiles@2
+            displayName: "Copy files to IIS"
+            inputs:
+              SourceFolder: '$(Pipeline.Workspace)/drop'
+              TargetFolder: 'C:\inetpub\wwwroot\SalesDatePredictionAPI'  # Cambia por la ruta de tu sitio
+              OverWrite: true
+
+          - powershell: Start-WebAppPool -Name "SalesDatePredictionAPI"
+            displayName: "Start IIS App Pool"
