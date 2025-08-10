@@ -13,6 +13,7 @@ stages:
       name: Default  # Usa tu agente de Azure DevOps (puede ser Microsoft-hosted)
     variables:
       buildConfiguration: 'Release'
+      ASPNETCORE_ENVIRONMENT: 'Development'
     steps:
     - task: UseDotNet@2
       inputs:
@@ -63,6 +64,18 @@ stages:
           steps:
           - powershell: Stop-WebAppPool -Name "SalesDatePredictionAPI"
             displayName: "Stop IIS App Pool"
+
+          - powershell: |
+              $backupPath = "D:\IIS_Backups\SalesDatePredictionAPI_$(Build.BuildNumber).zip"
+              Compress-Archive -Path "C:\inetpub\wwwroot\SalesDatePredictionAPI\*" -DestinationPath $backupPath
+            displayName: "Compress IIS Backup"
+
+          - task: CopyFiles@2
+            displayName: "Backup current IIS files"
+            inputs:
+              SourceFolder: 'C:\inetpub\wwwroot\SalesDatePredictionAPI'
+              Contents: '**'
+              TargetFolder: 'D:\IIS_Backups\SalesDatePredictionAPI_$(Build.BuildNumber)'              
 
           - task: CopyFiles@2
             displayName: "Copy files to IIS"
